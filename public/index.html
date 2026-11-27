@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="Check your local air quality and plan your day around it.">
+  <title>ClearAir | Urban Air Quality Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a href="#overview" class="brand"><span class="brand-mark" data-icon="wind"></span><span>ClearAir<small>URBAN AIR ASSISTANT</small></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#overview" class="nav-link active"><i data-icon="grid"></i>Overview</a>
+      <a href="#daily-plan" class="nav-link"><i data-icon="calendar"></i>Daily Plan</a>
+      <a href="#indoor-air" class="nav-link"><i data-icon="home"></i>Indoor Air</a>
+      <a href="#impact" class="nav-link"><i data-icon="leaf"></i>My Impact</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <button id="preferences" class="nav-link"><i data-icon="settings"></i>Preferences</button>
+      <button id="side-assistant" class="side-assistant"><i data-icon="sparkles"></i><span><b>Ask ClearAir</b><small>Your air quality assistant</small></span></button>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><div class="crumb"><button id="menu" class="icon-button mobile-menu" aria-label="Toggle navigation" aria-expanded="false" data-icon="menu"></button><span>Dashboard</span><i data-icon="right"></i><strong id="crumb">Overview</strong></div>
+      <div class="header-actions"><button id="location-button" class="location"><i data-icon="pin"></i><span id="location-label">New Delhi, India</span><i data-icon="down"></i></button><button id="profile" class="avatar" aria-label="Household preferences">CA</button></div>
+    </header>
+    <main>
+      <div id="overview" class="page-intro">
+        <div><div class="eyebrow"><i data-icon="sun"></i><span id="today-label">TODAY'S AIR BRIEF</span></div><h1>Your air, today.</h1><p>Know what’s in the air and plan a healthier day around it.</p></div>
+        <button class="primary" id="top-assistant"><i data-icon="sparkles"></i>Ask ClearAir</button>
+      </div>
+      <div class="dashboard-grid">
+        <section class="air-card" aria-labelledby="air-title">
+          <div class="air-content">
+            <div class="air-top"><h2 id="air-title"><i data-icon="wind"></i> Outdoor Air Quality</h2><span id="data-state" class="data-state"><i></i> Sample data</span></div>
+            <div class="aqi-line"><strong id="aqi">182</strong><div><span class="aqi-unit">US AQI</span><div id="aqi-status" class="severity">Unhealthy</div></div></div>
+            <p id="air-guidance">Keep outdoor activity light and move strenuous exercise indoors.</p>
+            <div class="scale"><div id="scale-marker"></div></div>
+            <div class="scale-labels"><span>Good</span><span>Moderate</span><span>Unhealthy</span><span>Hazardous</span></div>
+            <div class="air-footer"><span><i data-icon="layers"></i>PM2.5 <b id="pm">96 µg/m³</b></span><span><i data-icon="clock"></i><span id="update-time">Example winter reading</span></span></div>
+          </div>
+        </section>
+        <section class="panel plan-card" id="daily-plan">
+          <div class="panel-head"><div class="tile lavender"><i data-icon="calendar"></i></div><div><h2>Today’s Smart Plan</h2><p id="plan-subtitle">For a family with children</p></div></div>
+          <div id="routine" class="routine"></div>
+          <button id="customize" class="outline full"><i data-icon="sliders"></i> Personalize my plan</button>
+        </section>
+        <section class="panel forecast-card" aria-labelledby="forecast-title">
+          <div class="panel-head"><div class="tile blue"><i data-icon="activity"></i></div><div><h2 id="forecast-title">Air Quality Forecast</h2><p id="forecast-label">Next 24 hours · US AQI</p></div><div class="segments" aria-label="Forecast length"><button id="hours24" aria-pressed="true">24h</button><button id="hours48" aria-pressed="false">48h</button></div></div>
+          <div id="chart" class="chart"></div>
+          <div class="forecast-note"><i data-icon="clock"></i><span id="forecast-note"></span></div>
+        </section>
+        <section class="panel impact-card" id="impact">
+          <div class="panel-head"><div class="tile mint"><i data-icon="leaf"></i></div><div><h2>Your Impact</h2><p>See what one less car trip saves</p></div></div>
+          <div class="impact-value"><strong id="impact-total">1.24</strong><span>kg CO₂</span></div>
+          <p class="impact-caption">Estimated tailpipe CO₂ avoided</p>
+          <div class="impact-control"><label for="distance">Car trip avoided</label><output for="distance" id="distance-label">5 km</output></div>
+          <input id="distance" type="range" min="0" max="30" step="0.5" value="5">
+          <p class="impact-method">Based on a typical U.S. gasoline car at <a href="https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle" target="_blank" rel="noopener noreferrer">400 g CO₂ per mile</a>.</p>
+        </section>
+        <section class="panel indoor-card" id="indoor-air">
+          <div class="panel-head"><div class="tile mint"><i data-icon="home"></i></div><div><h2>Cleaner Air at Home</h2><p>Small changes that reduce indoor particles</p></div></div>
+          <div class="indoor-tips">
+            <article><i data-icon="wind"></i><h3>Filter one room</h3><p>Run a room-sized HEPA purifier where your household spends the most time. HEPA filters capture fine airborne particles.</p></article>
+            <article><i data-icon="home"></i><h3>Time your ventilation</h3><p>Keep windows closed when outdoor particle pollution is high. Air out your home when conditions improve.</p></article>
+            <article><i data-icon="leaf"></i><h3>Cut indoor smoke</h3><p>Skip candles and incense on smog days. Use an outdoor-vented exhaust fan when cooking to remove cooking fumes.</p></article>
+          </div>
+        </section>
+      </div>
+      <footer>Air data <a href="https://open-meteo.com/en/docs/air-quality-api">Open-Meteo</a> and <a href="https://atmosphere.copernicus.eu/">CAMS</a> <span>·</span> <a href="https://www.airnow.gov/aqi/aqi-basics/">US AQI guide</a> <span>·</span> <a href="https://www.epa.gov/indoor-air-quality-iaq/sources-indoor-particulate-matter-pm">Indoor air guidance</a></footer>
+    </main>
+  </div>
+  <dialog id="location-dialog">
+    <div class="dialog-head"><div><h2>Change location</h2><p>Find a city for its local air-quality forecast.</p></div><button class="icon-button close" aria-label="Close" data-icon="close"></button></div>
+    <form id="city-form"><label for="city-input">City name</label><div class="input-row"><input type="search" id="city-input" required minlength="2" placeholder="e.g. New Delhi" maxlength="100"><button class="primary">Search</button></div></form>
+    <div id="city-results" class="city-results" aria-live="polite"></div>
+  </dialog>
+  <dialog id="preferences-dialog">
+    <div class="dialog-head"><div><h2>Personalize your plan</h2><p>Choose what fits your household and daily routine.</p></div><button class="icon-button close" aria-label="Close" data-icon="close"></button></div>
+    <form id="preferences-form">
+      <label for="household">Household</label><select id="household"><option value="family">Family with children</option><option value="sensitive">Household with extra sensitivity</option><option value="adult">Adults</option><option value="community">Community group</option></select>
+      <label for="commute">Usual commute</label><select id="commute"><option value="car">Drive</option><option value="transit">Public transit</option><option value="active">Walk or cycle</option><option value="home">Work from home</option></select>
+      <label for="filter">Air filtration at home</label><select id="filter"><option value="yes">I have a HEPA air purifier</option><option value="no">I don’t have an air purifier</option></select>
+      <button class="primary full" type="submit">Save preferences</button>
+    </form>
+  </dialog>
+  <dialog id="assistant-dialog" class="assistant-dialog">
+    <div class="dialog-head"><div class="panel-head"><div class="tile lavender"><i data-icon="sparkles"></i></div><div><h2>Ask ClearAir</h2><p id="assistant-context"></p></div></div><button class="icon-button close" aria-label="Close" data-icon="close"></button></div>
+    <div class="messages" id="messages" role="log" aria-live="polite"><div class="message assistant">I can help you plan around smog, reduce indoor particles, or compare lower-emission trips. What’s on your mind?</div></div>
+    <div class="suggestions"><button data-question="How should I plan today?">Plan my day</button><button data-question="How can I improve the air at home?">Indoor air tips</button><button data-question="How can I cut commute emissions?">Greener commute</button></div>
+    <form id="assistant-form"><div class="input-row"><input id="question" aria-label="Your question" placeholder="Ask about air quality…" maxlength="500" required><button type="submit" class="primary">Send</button></div></form>
+    <p class="assistant-foot" id="assistant-foot">Air-quality guidance and planning support.</p>
+  </dialog>
+</body>
+</html>
