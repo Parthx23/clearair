@@ -9,3 +9,7 @@ Run `npm start` with Node.js 22 or later and open `http://127.0.0.1:4173`. The p
 Set `OPENAI_API_KEY` in the server environment to enable generated answers through the OpenAI Responses API. Optionally set `OPENAI_MODEL` to override `gpt-4.1-mini`. For local development, copy `.env.example` to `.env`, fill in the key, and start with `node --env-file=.env scripts/serve.mjs`. When the model is unavailable, chat uses built-in guidance based on the same selected city and household preferences.
 
 `npm run build` creates the Sites Worker artifact under `dist/`.
+
+## Vercel
+
+Vercel serves the dashboard from `public/` and runs `api/assistant.js` as a Node.js function. Import the repository or run `vercel deploy --prod` from the project root. Set `OPENAI_API_KEY` in the project's server-side environment to enable generated responses.
